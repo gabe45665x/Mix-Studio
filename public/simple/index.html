@@ -1,0 +1,99 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<!-- Modified from Mix Studio (c) Black Mixture; zh-TW customization (c) gabe45665x 2026 -->
+<html lang="zh-Hant-TW" data-simple-shell>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
+  <meta name="application-name" content="Mix Studio">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <title>Mix Studio</title>
+  <link rel="manifest" href="/simple/manifest.webmanifest">
+  <link rel="icon" href="/simple/icons/app-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/simple/style.css">
+</head>
+<body data-ui-mode="text-image">
+  <div class="app" id="app">
+    <header class="app-bar" id="appBar">
+      <a class="wordmark" href="#/">
+        <span class="wordmark-mark" aria-hidden="true">M</span>
+        <span>Mix Studio</span>
+      </a>
+      <button class="icon-button" id="moreButton" type="button" aria-label="更多選項" data-i18n-aria="shell.moreOptions" aria-expanded="false" aria-controls="moreMenu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+      </button>
+      <div class="menu" id="moreMenu" hidden>
+        <a href="/studio" data-i18n="nav.advancedStudio">進階工作室</a>
+        <button type="button" data-action="about" data-i18n="nav.about">關於</button>
+        <button type="button" data-action="logout" data-i18n="actions.signOut">登出</button>
+      </div>
+    </header>
+
+    <div class="network-banner" id="networkBanner" role="status" aria-live="polite" hidden></div>
+    <main class="main" id="view" tabindex="-1">
+      <div class="loading-screen" aria-label="正在載入">
+        <span class="spinner" aria-hidden="true"></span>
+        <p>正在準備創作空間…</p>
+      </div>
+    </main>
+
+    <nav class="tab-bar" id="tabBar" aria-label="主要導覽" hidden>
+      <a href="#/" data-route="/" aria-label="首頁" data-i18n-aria="nav.home">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4V4Zm10 0h6v6h-6V4ZM4 14h6v6H4v-6Zm10 0h6v6h-6v-6Z"/></svg>
+        <span data-i18n="nav.home">首頁</span>
+      </a>
+      <a href="#/tasks" data-route="/tasks" aria-label="任務" data-i18n-aria="nav.tasks">
+        <span class="tab-icon-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h14v2H6V5Zm0 6h14v2H6v-2Zm0 6h14v2H6v-2ZM3 4h2v4H3V4Zm0 6h2v4H3v-4Zm0 6h2v4H3v-4Z"/></svg><i id="taskBadge" hidden></i></span>
+        <span data-i18n="nav.tasks">任務</span>
+      </a>
+      <a href="#/library" data-route="/library" aria-label="素材庫" data-i18n-aria="nav.library">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4V4Zm2 2v9l3.4-3.6 2.7 2.7 2.1-2.2L18 16V6H6Zm3 1.5a1.75 1.75 0 1 0 0 3.5 1.75 1.75 0 0 0 0-3.5Z"/></svg>
+        <span data-i18n="nav.library">素材庫</span>
+      </a>
+      <a href="#/custom" data-route="/custom" aria-label="自訂工作流" data-i18n-aria="nav.customWorkflows">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3a3 3 0 1 1-1 5.83V11h5V8.83a3 3 0 1 1 2 0V11h5V8.83a3 3 0 1 1 2 0V13h-7v2.17a3 3 0 1 1-2 0V13H4V8.83A3 3 0 0 1 7 3Z"/></svg>
+        <span data-i18n="nav.customWorkflows">自訂工作流</span>
+      </a>
+      <a href="#/settings" data-route="/settings" aria-label="設定" data-i18n-aria="nav.settings">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13.3 2 .7 2.1c.5.2 1 .4 1.5.7l2-.9 2.2 2.2-.9 2c.3.5.5 1 .7 1.5l2.1.7v3.2l-2.1.7c-.2.5-.4 1-.7 1.5l.9 2-2.2 2.2-2-.9c-.5.3-1 .5-1.5.7l-.7 2.1h-3.2l-.7-2.1c-.5-.2-1-.4-1.5-.7l-2 .9-2.2-2.2.9-2c-.3-.5-.5-1-.7-1.5l-2.1-.7v-3.2l2.1-.7c.2-.5.4-1 .7-1.5l-.9-2 2.2-2.2 2 .9c.5-.3 1-.5 1.5-.7l.7-2.1h3.2ZM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/></svg>
+        <span data-i18n="nav.settings">設定</span>
+      </a>
+    </nav>
+  </div>
+
+  <div class="sheet-layer" id="sheetLayer" hidden>
+    <button class="sheet-scrim" type="button" data-action="close-sheet" aria-label="關閉" data-i18n-aria="actions.close"></button>
+    <section class="bottom-sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <header><h2 id="sheetTitle" data-i18n="fields.advanced">進階設定</h2><button class="icon-button" type="button" data-action="close-sheet" aria-label="關閉" data-i18n-aria="actions.close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6.4 5 12.6 12.6-1.4 1.4L5 6.4 6.4 5Zm11.2 0L19 6.4 6.4 19 5 17.6 17.6 5Z"/></svg></button></header>
+      <div id="sheetContent"></div>
+    </section>
+  </div>
+
+  <div class="modal-layer" id="modalLayer" hidden>
+    <button class="modal-scrim" type="button" data-action="close-modal" aria-label="關閉" data-i18n-aria="actions.close"></button>
+    <section class="confirm-modal" role="alertdialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h2 id="modalTitle">確認</h2>
+      <div id="modalContent"></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script defer src="/simple/i18n.js"></script>
+  <script defer src="/simple/payloads.js"></script>
+  <script defer src="/simple/views/home.js"></script>
+  <script defer src="/simple/views/tasks.js"></script>
+  <script defer src="/simple/views/library.js"></script>
+  <script defer src="/simple/views/custom.js"></script>
+  <script defer src="/simple/views/settings.js"></script>
+  <script defer src="/simple/views/login.js"></script>
+  <script defer src="/qrcodegen.js"></script>
+  <script defer src="/simple/app.js"></script>
+</body>
+</html>

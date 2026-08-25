@@ -10,6 +10,7 @@
     "back": "Back"
   },
   "home": {
+    "eyebrow": "Create locally",
     "title": "Start creating",
     "subtitle": "Describe what you want to make",
     "status": "System status",
@@ -151,6 +152,7 @@
     "analytics": "Records only app and model starts, never prompts, media, or screen recordings."
   },
   "tasks": {
+    "eyebrow": "Creative activity",
     "title": "Tasks",
     "queue": "Queue",
     "active": "Active",
@@ -179,6 +181,7 @@
     "lastKnownProgress": "Last progress update at {time}"
   },
   "library": {
+    "eyebrow": "Creations",
     "title": "Library",
     "all": "All",
     "images": "Images",
@@ -201,6 +204,7 @@
     "groupCount": "{count} items"
   },
   "custom": {
+    "eyebrow": "Advanced workflows",
     "title": "Custom Workflows",
     "ready": "Ready",
     "unavailable": "Not started: {reason}",
@@ -218,6 +222,7 @@
     "backHome": "Back to Home"
   },
   "settings": {
+    "eyebrow": "Preferences",
     "title": "Settings",
     "account": "Account",
     "currentProfile": "Current profile",
@@ -356,6 +361,55 @@
     "seconds": "{count} seconds",
     "megabytes": "{count} MB",
     "gigabytes": "{count} GB"
+  },
+  "shell": {
+    "moreOptions": "More options",
+    "tasksIntro": "Track the queue, progress, and recently completed creations.",
+    "tasksEmptyDetail": "New jobs will show live progress here.",
+    "settingsIntro": "Manage your account, appearance, connection, and privacy.",
+    "changePinHint": "Change it from your profile in Advanced Studio",
+    "signOutHint": "This device will return to the sign-in screen",
+    "languageHint": "Interface language",
+    "appearanceHint": "Dark or OLED pure black",
+    "startComfyHint": "Start the currently configured portable environment",
+    "capabilitiesTitle": "Creative capabilities",
+    "licenseLayer": "GPL-3.0-or-later customization layer",
+    "loginPrivacy": "Your creations remain on this host.",
+    "libraryIntro": "All images and videos remain on your creative host.",
+    "mediaTypes": "Media types",
+    "searchAgain": "Try another search term.",
+    "libraryEmptyDetail": "Completed images and videos will appear here automatically.",
+    "uploadHint": "JPEG, PNG, or WebP, up to 50 MB",
+    "viewAll": "View all",
+    "modeGroup": "Creation mode",
+    "motionPromptEffect": "Affects the prompt",
+    "sampling": "Sampling",
+    "engineControlsSampler": "The engine chooses the sampler and scheduler.",
+    "preciseSize": "Exact size",
+    "videoPost": "Video settings",
+    "engineDetermined": "Chosen by engine",
+    "longVideo": "Long video",
+    "postProcessing": "Post-processing",
+    "faceId": "Face ID",
+    "customPending": "The interface is ready. The workflow service will be connected during a later installation step.",
+    "notInstalled": "Not installed",
+    "firstUse": "First use",
+    "capabilitiesReady": "Ready: {items}",
+    "capabilitiesEmpty": "No ready models were detected. Install them from Advanced Studio.",
+    "imageEditing": "Image editing",
+    "enhancePending": "Prompt enhancement will be enabled when the four modes are connected.",
+    "promptRequired": "Enter a prompt first.",
+    "imageRequired": "Choose a reference image first.",
+    "mappingPending": "The interface is ready. Generation parameters will be connected in WP-05.",
+    "trashCount": "Trash currently contains {count} items.",
+    "trashSummary": "Trash contains {count} recoverable files using {size}.",
+    "trashRestoreDeferred": "This version can safely retain or permanently empty files. Per-item restore will arrive with the trash index.",
+    "connectionLost": "Connection lost. Retrying…",
+    "connectionRecovered": "Connection restored. Progress is synchronized.",
+    "sessionExpired": "Your session expired. Sign in again.",
+    "phoneQrLabel": "QR code for the Mix Studio phone address",
+    "httpsHint": "Use Tailscale to enable HTTPS for phone access.",
+    "reuseRestored": "Generation settings were restored on Home."
   },
   "toast": {
     "queued": "Added to queue",

@@ -10,6 +10,7 @@
     "back": "返回"
   },
   "home": {
+    "eyebrow": "本機創作",
     "title": "開始創作",
     "subtitle": "描述你想製作的內容",
     "status": "系統狀態",
@@ -151,6 +152,7 @@
     "analytics": "只記錄 App 啟動與模型啟動次數，不含提示詞、圖片、影片或畫面錄製。"
   },
   "tasks": {
+    "eyebrow": "創作進度",
     "title": "任務",
     "queue": "佇列",
     "active": "進行中",
@@ -179,6 +181,7 @@
     "lastKnownProgress": "最後進度更新於 {time}"
   },
   "library": {
+    "eyebrow": "創作內容",
     "title": "素材庫",
     "all": "全部",
     "images": "圖片",
@@ -201,6 +204,7 @@
     "groupCount": "{count} 個項目"
   },
   "custom": {
+    "eyebrow": "進階工作流",
     "title": "自訂工作流",
     "ready": "已就緒",
     "unavailable": "尚未啟動：{reason}",
@@ -218,6 +222,7 @@
     "backHome": "返回首頁"
   },
   "settings": {
+    "eyebrow": "偏好設定",
     "title": "設定",
     "account": "帳號",
     "currentProfile": "目前使用者",
@@ -356,6 +361,55 @@
     "seconds": "{count} 秒",
     "megabytes": "{count} MB",
     "gigabytes": "{count} GB"
+  },
+  "shell": {
+    "moreOptions": "更多選項",
+    "tasksIntro": "掌握佇列、進度與最近完成的創作。",
+    "tasksEmptyDetail": "新的任務會在這裡顯示即時進度。",
+    "settingsIntro": "帳號、外觀、連線與隱私集中管理。",
+    "changePinHint": "請在進階工作室的個人資料中修改",
+    "signOutHint": "這部裝置會回到登入頁",
+    "languageHint": "介面顯示語言",
+    "appearanceHint": "深色／OLED 純黑",
+    "startComfyHint": "從目前設定的可攜式環境啟動",
+    "capabilitiesTitle": "創作能力",
+    "licenseLayer": "GPL-3.0-or-later 客製層",
+    "loginPrivacy": "你的創作內容只留在這部主機。",
+    "libraryIntro": "所有圖片與影片都保留在你的創作主機。",
+    "mediaTypes": "素材類型",
+    "searchAgain": "換個關鍵字再找一次。",
+    "libraryEmptyDetail": "完成的圖片與影片會自動出現在這裡。",
+    "uploadHint": "JPEG、PNG 或 WebP，最大 50 MB",
+    "viewAll": "查看全部",
+    "modeGroup": "創作模式",
+    "motionPromptEffect": "影響提示詞",
+    "sampling": "取樣",
+    "engineControlsSampler": "取樣器與排程器由引擎決定。",
+    "preciseSize": "精確尺寸",
+    "videoPost": "影片設定",
+    "engineDetermined": "由引擎決定",
+    "longVideo": "長影片",
+    "postProcessing": "後製",
+    "faceId": "Face ID",
+    "customPending": "介面已準備完成，工作流服務會在後續安裝階段接上。",
+    "notInstalled": "尚未安裝",
+    "firstUse": "第一次使用",
+    "capabilitiesReady": "已就緒：{items}",
+    "capabilitiesEmpty": "尚未偵測到可用模型；可在進階工作室安裝。",
+    "imageEditing": "圖片編輯",
+    "enhancePending": "提示詞增強會在四模式接線階段啟用。",
+    "promptRequired": "請先輸入提示詞。",
+    "imageRequired": "請先選擇參考圖片。",
+    "mappingPending": "介面已就緒；生成參數會在下一階段 WP-05 接上。",
+    "trashCount": "垃圾桶目前有 {count} 個項目。",
+    "trashSummary": "垃圾桶有 {count} 個可復原檔案，共 {size}。",
+    "trashRestoreDeferred": "目前版本可安全保留或永久清空檔案；逐項還原會在垃圾桶資料索引完成後啟用。",
+    "connectionLost": "連線中斷，正在重試…",
+    "connectionRecovered": "連線已恢復，進度已同步。",
+    "sessionExpired": "登入已過期，請重新登入。",
+    "phoneQrLabel": "Mix Studio 手機網址 QR Code",
+    "httpsHint": "使用 Tailscale 為手機連線啟用 HTTPS。",
+    "reuseRestored": "已把生成設定帶回首頁。"
   },
   "toast": {
     "queued": "已加入佇列",

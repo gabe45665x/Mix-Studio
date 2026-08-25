@@ -49,6 +49,9 @@ const {
   MODEL_ASSETS: DEPENDENCY_MODEL_ASSETS,
   normalizeHuggingFaceEndpoint,
 } = require('./lib/dependency-installer');
+// [ZH-TW-CUSTOM] WP-04: redacted capability API and opt-in shell settings.
+const { createSimpleCapabilities } = require('./lib/zh/simple-capabilities');
+const { readZhConfig, writeZhConfig } = require('./lib/zh/config');
 const {
   activeH3ModelSettingKeys,
   h3EffectiveModelName,
@@ -6984,12 +6987,49 @@ async function setupStatusPayload(forceCompatibility = false) {
   };
 }
 
+// [ZH-TW-CUSTOM] WP-04: derive a fail-closed public capability map without
+// returning ComfyUI URLs, local paths, model filenames, or node identifiers.
+async function simpleCapabilitiesPayload(force = false) {
+  const componentIds = availableComponents();
+  let info;
+  try {
+    info = await getObjectInfo(force);
+  } catch {
+    return createSimpleCapabilities({
+      availableComponents: componentIds,
+      missingComponents: componentIds,
+      connected: false,
+    });
+  }
+
+  const missing = {};
+  for (const [group, classes] of Object.entries(REQUIRED_CLASSES)) {
+    missing[group] = classes.filter((className) => !info[className]);
+  }
+  const compatibility = await getComfyCompatibility(force).catch(() => ({ version: '' }));
+  const h3Core = minimaxH3Compatibility(info, compatibility.version);
+  if (h3Core.nativeAudioSampling) {
+    missing.h3turbo = [
+      h3TurboUsesStandardLoader(settings, 'frames') ? 'LoraLoaderModelOnly' : 'MiniMaxH3TurboLoRA',
+      'MiniMaxH3SigmaShift',
+    ].filter((className) => !info[className]);
+  }
+  const missingComponents = missingDependencyComponentIds(missing, configuredModelsStatus(info));
+  return createSimpleCapabilities({
+    availableComponents: componentIds,
+    missingComponents,
+    connected: true,
+  });
+}
+
 async function handleApi(req, res, url) {
   const route = url.pathname;
 
   if (route === '/api/analytics-config' && req.method === 'GET') {
     res.setHeader('Cache-Control', 'no-store');
-    return json(res, 200, publicAnalyticsConfig(RUNTIME));
+    return json(res, 200, publicAnalyticsConfig(RUNTIME, readZhConfig({
+      filePath: path.join(DATA, 'zh-tw.json'),
+    })));
   }
 
   /* ------------------------- Auth / profiles ----------------------- */
@@ -7169,6 +7209,24 @@ async function handleApi(req, res, url) {
   // previews, and completed gallery records and are always profile-scoped.
   if (!profile && route !== '/api/meta') {
     return json(res, 401, { error: 'Sign in to continue', code: 'auth' });
+  }
+
+  // [ZH-TW-CUSTOM] WP-04: simple shell endpoints are profile-scoped and the
+  // analytics preference can only be changed by the owner.
+  if (route === '/api/simple/capabilities' && req.method === 'GET') {
+    res.setHeader('Cache-Control', 'no-store');
+    return json(res, 200, await simpleCapabilitiesPayload(url.searchParams.has('refresh')));
+  }
+  if (route === '/api/simple/analytics' && req.method === 'POST') {
+    if (!isAdmin()) return json(res, 403, { error: 'Only the owner profile can change anonymous analytics' });
+    const body = await readJsonBody(req);
+    if (typeof body.enabled !== 'boolean') {
+      return json(res, 400, { error: 'enabled must be true or false' });
+    }
+    const config = writeZhConfig({ analytics: { enabled: body.enabled } }, {
+      filePath: path.join(DATA, 'zh-tw.json'),
+    });
+    return json(res, 200, { ok: true, analytics: config.analytics });
   }
 
   if (route === '/api/smart/plan/status' && req.method === 'GET') {
@@ -12084,7 +12142,15 @@ const server = http.createServer(async (req, res) => {
       if (!media) { res.writeHead(404); return res.end('not found'); }
       return serveFile(res, media.file, req.headers.range);
     }
-    let p = url.pathname === '/' ? '/index.html' : url.pathname;
+    // [ZH-TW-CUSTOM] WP-04: the mobile shell owns `/`; the untouched full
+    // Studio remains available at `/studio` with its existing root assets.
+    if (url.pathname === '/studio/') {
+      res.writeHead(302, { Location: '/studio' });
+      return res.end();
+    }
+    let p = url.pathname;
+    if (url.pathname === '/') p = '/simple/index.html';
+    else if (url.pathname === '/studio') p = '/index.html';
     const publicFile = safeMediaPath(PUBLIC, p.replace(/^\//, ''));
     if (!publicFile) { res.writeHead(404); return res.end('not found'); }
     if (isCriticalPublicAsset(publicFile.name)) {

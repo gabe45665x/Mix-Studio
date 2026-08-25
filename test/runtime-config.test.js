@@ -154,3 +154,14 @@ test('analytics refuses an insecure collection host', () => {
   });
   assert.equal(publicAnalyticsConfig(runtime).enabled, false);
 });
+
+test('analytics honors the zh-TW shell opt-in without exposing a key while disabled', () => {
+  const root = path.resolve('/work/mixbox');
+  const runtime = resolveRuntimeConfig(root, { env: {}, ...fakeFs({}) });
+  const disabled = publicAnalyticsConfig(runtime, { analytics: { enabled: false } });
+  const enabled = publicAnalyticsConfig(runtime, { analytics: { enabled: true } });
+  assert.equal(disabled.enabled, false);
+  assert.equal(disabled.key, '');
+  assert.equal(disabled.host, '');
+  assert.equal(enabled.enabled, true);
+});

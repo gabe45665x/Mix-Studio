@@ -1,0 +1,14 @@
+{
+  "name": "Mix Studio",
+  "short_name": "Mix Studio",
+  "description": "手機優先的本機 AI 創作工作室",
+  "lang": "zh-TW",
+  "start_url": "/simple/index.html#/",
+  "scope": "/simple/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    { "src": "/simple/icons/app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

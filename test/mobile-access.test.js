@@ -42,6 +42,15 @@ test('builds copyable same-Wi-Fi and Tailscale URLs for onboarding', () => {
   assert.match(summary.downloadUrl, /^https:\/\/tailscale\.com\//);
 });
 
+test('prefers a physical home LAN over virtual adapters for the phone QR', () => {
+  const summary = mobileAccessSummary({
+    'vEthernet (WSL)': [{ family: 'IPv4', internal: false, address: '172.23.48.1' }],
+    'Wi-Fi': [{ family: 'IPv4', internal: false, address: '192.168.68.50' }],
+    Tailscale: [{ family: 'IPv4', internal: false, address: '100.84.124.40' }],
+  }, 3300);
+  assert.equal(summary.localUrl, 'http://192.168.68.50:3300');
+});
+
 test('reads the private DNS name used by an installable Tailscale HTTPS origin', () => {
   assert.equal(tailscaleDnsName({ Self: { DNSName: 'mix-pc.example-tailnet.ts.net.' } }), 'mix-pc.example-tailnet.ts.net');
   assert.equal(tailscaleDnsName({ Self: { DNSName: 'not a host' } }), '');

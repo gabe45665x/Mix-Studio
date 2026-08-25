@@ -1,0 +1,7 @@
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<!-- Modified from Mix Studio (c) Black Mixture; zh-TW customization (c) gabe45665x 2026 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#000"/>
+  <rect x="70" y="70" width="372" height="372" rx="104" fill="#10131a" stroke="#4257ff" stroke-width="18"/>
+  <path d="M150 348V164h58l48 78 48-78h58v184h-58V251l-50 77-48-77v97h-56Z" fill="#f6f8ff"/>
+</svg>
