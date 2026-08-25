@@ -1,7 +1,7 @@
 # WP-02 安全 Git 工作分支報告
 
 日期：2026-08-25
-狀態：完成，待推送驗證
+狀態：完成
 
 ## 完成項目
 
@@ -32,6 +32,7 @@ hooksPath: .githooks
 ```text
 9fd842b236ae370d0c9dfb33fd8a831bf40b00b9 WP-02: 建立安全 Git 工作分支
 2190a27e0b2037403d755b339981606f8ec0ee3a WP-02: 修正 Windows 密鑰掃描 hook
+f05e51e6d57b17c242d06a099d4b5f0bec71be0d WP-02: 新增 Git 工作流報告
 ```
 
 報告前的 `git diff --stat baseline-bec3292..HEAD`：15 個檔案，新增 2697 行。
@@ -46,6 +47,8 @@ hooksPath: .githooks
 2. 官方完整測試直接執行：1263/1264 通過；1 個既有 `model-discovery` 測試受到本機 Comfy Desktop 真實 `%LOCALAPPDATA%` 模型設定污染。
 3. 將 `%APPDATA%` 與 `%LOCALAPPDATA%` 指向空白隔離目錄後重跑完整測試：1264/1264 通過，0 failure。
 4. `git diff --cached --check`：通過。
+5. `git push -u origin zh-tw --tags`：成功；遠端已建立 `zh-tw`、`baseline-bec3292`，並同步官方既有版本 tags `v1.0.1`～`v1.2.4`。
+6. GitHub 瀏覽器驗證：`https://github.com/gabe45665x/Mix-Studio/tree/zh-tw` 可正常開啟。
 
 ## 規格衝突與保守處理
 
@@ -66,4 +69,4 @@ WP-02 同時要求「只要出現 `pinHash`、`auth_secret`、`ks_profile=` 字�
 
 ## 下一步
 
-推送 `zh-tw` 與 tags 到正確 Fork，確認遠端分支與 tag；接著回到 WP-01 完成官方原版 Smoke Test。
+回到 WP-01 完成官方原版 Smoke Test；通過 Gate 後才開始 WP-03。
