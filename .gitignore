@@ -35,3 +35,8 @@ _archive/
 .DS_Store
 Thumbs.db
 *.log
+
+# zh-TW customization secrets, reports, and local backups
+*.env
+docs/zh-tw/reports/*.zip
+backups/

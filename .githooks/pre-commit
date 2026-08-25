@@ -1,0 +1,26 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+set -eu
+
+hf_pattern='h''f_[A-Za-z0-9]{20,}'
+pin_key='pin''Hash'
+auth_key='auth_''secret'
+profile_key='ks_''profile='
+pin_pattern="${pin_key}[[:space:]]*[:=][[:space:]]*['\"]?[A-Za-z0-9._/+=$-]{20,}"
+auth_pattern="${auth_key}[[:space:]]*[:=][[:space:]]*['\"]?[A-Za-z0-9._/+=$-]{20,}"
+profile_pattern="${profile_key}['\"]?[A-Za-z0-9._~+/$=-]{20,}"
+secret_pattern="${hf_pattern}|${pin_pattern}|${auth_pattern}|${profile_pattern}"
+
+added_lines="$(git diff --cached --no-ext-diff --unified=0 --diff-filter=ACMR -- . \
+  | grep '^+' \
+  | grep -v '^+++' \
+  || true)"
+
+if printf '%s\n' "$added_lines" | grep -E -q "$secret_pattern"; then
+  printf '%s\n' 'Commit blocked: staged changes contain a secret or sensitive session value.' >&2
+  printf '%s\n' 'Remove the value from the staged content and try again.' >&2
+  exit 1
+fi
+
+exit 0
